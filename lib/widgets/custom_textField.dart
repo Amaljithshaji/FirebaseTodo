@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import '../manager/color_manager.dart';
 import '../manager/font_manager.dart';
@@ -66,19 +65,19 @@ class _CustomTextFieldState extends State<CustomTextField> {
           height: widget.height ?? 10,
         ),
         Container(
-          height: widget.suffix == null ? null: 60,
+          height: widget.suffix == null ? null : 60,
           child: TextFormField(
             onChanged: widget.onChanged,
-              obscureText: obscure,
-              maxLines: widget.maxline,
-              style: appFont.f12w500Black,
-              cursorColor: appColors.brandDark,
-              validator: widget.validator,
-              keyboardType: widget.isNumberOnly ?? false
-                  ? TextInputType.number
-                  : TextInputType.text,
-              controller: widget.controller,
-              decoration: InputDecoration(
+            obscureText: obscure,
+            maxLines: widget.maxline,
+            style: appFont.f12w500Black,
+            cursorColor: appColors.brandDark,
+            validator: widget.validator,
+            keyboardType: widget.isNumberOnly ?? false
+                ? TextInputType.number
+                : TextInputType.text,
+            controller: widget.controller,
+            decoration: InputDecoration(
                 suffix: widget.suffix,
                 prefixIcon: widget.icon == null
                     ? null

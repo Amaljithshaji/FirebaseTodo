@@ -10,21 +10,15 @@ import '../manager/font_manager.dart';
 import '../utils/get_dimension.dart';
 
 class DetailCard extends StatelessWidget {
-  const DetailCard({
-    super.key,
-    required this.task,
-    required this.index
-   
-  });
- final Task task;
- final String index;
-  
+  const DetailCard({super.key, required this.task, required this.index});
+  final Task task;
+  final String index;
 
   @override
   Widget build(BuildContext context) {
     final deadlineDate = DateFormat('yyyy-MM-dd').format(task.deadlineDate);
     final String deadlineTime = task.deadlineTime.toString();
-        final duration = task.expectedDuration.inHours.toString();
+    final duration = task.expectedDuration.inHours.toString();
     return Container(
       padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
       decoration: BoxDecoration(
@@ -72,7 +66,7 @@ class DetailCard extends StatelessWidget {
               Text(deadlineDate, style: appFont.f18w400Black),
             ],
           ),
-           Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
@@ -99,7 +93,8 @@ class DetailCard extends StatelessWidget {
                 'Task Status :',
                 style: appFont.f18w400Black,
               ),
-              Text(task.isComplete == false ? 'Incomplete': 'Completed', style: appFont.f18w400Black),
+              Text(task.isComplete == false ? 'Incomplete' : 'Completed',
+                  style: appFont.f18w400Black),
             ],
           ),
           Row(
@@ -109,8 +104,7 @@ class DetailCard extends StatelessWidget {
                   buttonHeight: 10,
                   buttonWidth: screenWidth(context) * 0.25,
                   onTap: () {
-                     Get.toNamed('/AddTask',
-                      arguments: {'task':task});
+                    Get.toNamed('/AddTask', arguments: {'task': task});
                   },
                   title: Icon(
                     Icons.edit,
@@ -120,8 +114,8 @@ class DetailCard extends StatelessWidget {
                   buttonHeight: 10,
                   buttonWidth: screenWidth(context) * 0.25,
                   onTap: () {
-                     context.read<TaskCubit>().deleteTask(task.id ?? index);
-                     Get.back();
+                    context.read<TaskCubit>().deleteTask(task.id ?? index);
+                    Get.back();
                   },
                   title: Icon(
                     Icons.delete,
@@ -131,7 +125,10 @@ class DetailCard extends StatelessWidget {
                   buttonHeight: 10,
                   buttonWidth: screenWidth(context) * 0.25,
                   onTap: () {
-                    context.read<TaskCubit>().toggleTaskCompletion(taskId: task.id ?? index,isComplete: task.isComplete == false ?true:false,task: task );
+                    context.read<TaskCubit>().toggleTaskCompletion(
+                        taskId: task.id ?? index,
+                        isComplete: task.isComplete == false ? true : false,
+                        task: task);
                     Get.back();
                   },
                   title: Icon(

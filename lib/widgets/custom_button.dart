@@ -30,7 +30,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     double radius = borderRadius == null ? 8 : borderRadius!;
     AppColors appColors = AppColors();
-    
+
     return Center(
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: verticalPadding ?? 10),
@@ -63,11 +63,10 @@ class CustomButton extends StatelessWidget {
                   ? getDimension(context: context, horizontalPadding: 30).w
                   : buttonWidth,
               child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: borderButton ?? false ? 8 : buttonHeight ?? 10),
-                child: title
-              ),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 20.0,
+                      vertical: borderButton ?? false ? 8 : buttonHeight ?? 10),
+                  child: title),
             ),
           ),
         ),

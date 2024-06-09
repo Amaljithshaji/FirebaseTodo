@@ -2,7 +2,6 @@ import 'package:base/utils/get_primarySwatch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tz;
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -11,7 +10,6 @@ import 'core/cubit/notification_cubit/notification_cubit.dart';
 import 'core/cubit/task_cubit/task_cubit.dart';
 import 'manager/color_manager.dart';
 import 'manager/route_manager.dart';
-import 'presentation/home_screen/home.dart';
 import 'utils/local_notification.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -36,7 +34,8 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthCubit(),
         ),
         BlocProvider(
-          create: (context) => NotificationCubit(flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin),
+          create: (context) => NotificationCubit(
+              flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin),
         ),
       ],
       child: Builder(
@@ -59,21 +58,26 @@ class MyApp extends StatelessWidget {
                     debugShowCheckedModeBanner: false,
                     theme: ThemeData(
                       primarySwatch: getMaterialColor(appColors.brandDark),
-                      colorScheme: ColorScheme.fromSeed(seedColor: appColors.brandDark),
-                      bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white),
+                      colorScheme:
+                          ColorScheme.fromSeed(seedColor: appColors.brandDark),
+                      bottomSheetTheme: const BottomSheetThemeData(
+                          backgroundColor: Colors.white),
                       useMaterial3: true,
                     ),
                     getPages: appRoute(),
                     initialRoute: '/',
                   ),
                 );
-              } return GetMaterialApp(
+              }
+              return GetMaterialApp(
                 title: 'Todo',
                 debugShowCheckedModeBanner: false,
                 theme: ThemeData(
                   primarySwatch: getMaterialColor(appColors.brandDark),
-                  colorScheme: ColorScheme.fromSeed(seedColor: appColors.brandDark),
-                  bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white),
+                  colorScheme:
+                      ColorScheme.fromSeed(seedColor: appColors.brandDark),
+                  bottomSheetTheme:
+                      const BottomSheetThemeData(backgroundColor: Colors.white),
                   useMaterial3: true,
                 ),
                 getPages: appRoute(),

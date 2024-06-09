@@ -35,64 +35,75 @@ class _CompletedTaskState extends State<CompletedTask> {
       backgroundColor: appColors.brandLite,
       body: BlocBuilder<TaskCubit, TaskState>(
         builder: (context, state) {
-          if(state is TaskLoading){
-            return Center(child: CircularProgressIndicator(),);
-          }else if(state is TasksLoaded){
+          if (state is TaskLoading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is TasksLoaded) {
             return ListView(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-            children: [
-              ResponsiveGridList(
-                  listViewBuilderOptions: ListViewBuilderOptions(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics()),
-                  minItemWidth: 70,
-                  maxItemsPerRow: 1,
-                  verticalGridSpacing: 18,
-                  horizontalGridSpacing: 10,
-                  children: List.generate(state.completedTasks.length, (index) {
-                    final task =state.completedTasks[index];
-                    return InkWell(
-                      onTap: (){
-                        showBottom(task: task, index: index.toString());
-                      },
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                        width: double.infinity,
-                        height: 80,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: appColors.appGrey),
-                        child: Row(
-                          children: [
-                            Text(
-                              task.title,
-                              style: appFont.f20w500white,
-                            ),
-                          ],
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              children: [
+                ResponsiveGridList(
+                    listViewBuilderOptions: ListViewBuilderOptions(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics()),
+                    minItemWidth: 70,
+                    maxItemsPerRow: 1,
+                    verticalGridSpacing: 18,
+                    horizontalGridSpacing: 10,
+                    children:
+                        List.generate(state.completedTasks.length, (index) {
+                      final task = state.completedTasks[index];
+                      return InkWell(
+                        onTap: () {
+                          showBottom(task: task, index: index.toString());
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
+                          width: double.infinity,
+                          height: 80,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: appColors.appGrey),
+                          child: Row(
+                            children: [
+                              Text(
+                                task.title,
+                                style: appFont.f20w500white,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }))
-            ],
-          );
-          }else if(state is TaskFailure){
-            return Center(child: Text(state.message),);
+                      );
+                    }))
+              ],
+            );
+          } else if (state is TaskFailure) {
+            return Center(
+              child: Text(state.message),
+            );
           }
-          return Center(child: Text('No Complete tasks',style: appFont.f22wBoldBlack,),);
+          return Center(
+            child: Text(
+              'No Complete tasks',
+              style: appFont.f22wBoldBlack,
+            ),
+          );
         },
       ),
     );
   }
-  showBottom({required Task task,required String index}) {
+
+  showBottom({required Task task, required String index}) {
     showModalBottomSheet(
       context: context,
-      builder: (context) {    
-        return DetailCard(task: task,
-        index: index,);
+      builder: (context) {
+        return DetailCard(
+          task: task,
+          index: index,
+        );
       },
     );
   }
 }
-  
-

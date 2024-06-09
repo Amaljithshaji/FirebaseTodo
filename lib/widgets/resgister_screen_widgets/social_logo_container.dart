@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../manager/color_manager.dart';

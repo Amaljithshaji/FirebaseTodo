@@ -35,20 +35,25 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: appColors.brandDark,
         actions: [
-          IconButton(onPressed: (){
-             final logout = BlocProvider.of<AuthCubit>(context);
-             logout.logout();
-              Get.toNamed('/');
-             
-          }, icon: Icon(Icons.logout,color: Colors.white,)),
-          SizedBox(width: 10,)
+          IconButton(
+              onPressed: () {
+                final logout = BlocProvider.of<AuthCubit>(context);
+                logout.logout();
+                Get.toNamed('/');
+              },
+              icon: Icon(
+                Icons.logout,
+                color: Colors.white,
+              )),
+          SizedBox(
+            width: 10,
+          )
         ],
       ),
       backgroundColor: appColors.brandLite,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-         Get.toNamed('/AddTask');
-      
+          Get.toNamed('/AddTask');
         },
         backgroundColor: appColors.brandDark,
         child: Icon(
@@ -59,15 +64,15 @@ class _HomeScreenState extends State<HomeScreen> {
       body: BlocListener<TaskCubit, TaskState>(
         listener: (context, state) {
           if (state is TaskSuccess) {
-             ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message)),
-              );
-            } else if (state is TaskFailure) {
-              print(state.message);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message)),
-              );
-            }
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.message)),
+            );
+          } else if (state is TaskFailure) {
+            print(state.message);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.message)),
+            );
+          }
         },
         child: BlocBuilder<TaskCubit, TaskState>(
           builder: (context, state) {
@@ -125,7 +130,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text(state.message),
               );
             }
-            return Center(child: Text('No Complete tasks',style: appFont.f22wBoldBlack,),);
+            return Center(
+              child: Text(
+                'No Complete tasks',
+                style: appFont.f22wBoldBlack,
+              ),
+            );
           },
         ),
       ),

@@ -36,19 +36,22 @@ class _AddTaskState extends State<AddTask> {
   @override
   void initState() {
     super.initState();
-     _local = FlutterLocalNotificationsPlugin();
+    _local = FlutterLocalNotificationsPlugin();
     _initializeLocalNotifications();
     if (widget.task != null) {
-      dateController.text = DateFormat('yyyy-MM-dd').format(widget.task!.deadlineDate);
+      dateController.text =
+          DateFormat('yyyy-MM-dd').format(widget.task!.deadlineDate);
       titleController.text = widget.task!.title;
       desController.text = widget.task!.description;
-      durationController.text = widget.task!.expectedDuration.inHours.toString();
+      durationController.text =
+          widget.task!.expectedDuration.inHours.toString();
       timeController.text = widget.task!.deadlineTime.format(context);
     }
   }
 
   Future<void> _initializeLocalNotifications() async {
-    final AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings("@mipmap/ic_launcher");
+    final AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings("@mipmap/ic_launcher");
     final InitializationSettings initializationSettings =
         InitializationSettings(android: initializationSettingsAndroid);
     await _local.initialize(initializationSettings);
@@ -93,10 +96,12 @@ class _AddTaskState extends State<AddTask> {
       body: BlocListener<TaskCubit, TaskState>(
         listener: (context, state) {
           if (state is TaskSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Task Added')));
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text('Task Added')));
             Get.toNamed('/Home');
           } else if (state is TaskFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.message)));
             print(state.message);
           }
         },
@@ -111,7 +116,8 @@ class _AddTaskState extends State<AddTask> {
                   controller: titleController,
                   floatingTitle: 'Title',
                   hint: 'Title',
-                  validator: (value) => value!.isEmpty ? 'Please enter title' : null,
+                  validator: (value) =>
+                      value!.isEmpty ? 'Please enter title' : null,
                 ),
                 appSpaces.spaceForHeight20,
                 CustomTextField(
@@ -119,7 +125,8 @@ class _AddTaskState extends State<AddTask> {
                   floatingTitle: 'Description',
                   hint: 'Description',
                   maxline: 5,
-                  validator: (value) => value!.isEmpty ? 'Please enter description' : null,
+                  validator: (value) =>
+                      value!.isEmpty ? 'Please enter description' : null,
                 ),
                 appSpaces.spaceForHeight20,
                 GestureDetector(
@@ -129,7 +136,8 @@ class _AddTaskState extends State<AddTask> {
                       controller: dateController,
                       floatingTitle: 'Deadline Date',
                       hint: 'Deadline Date',
-                      validator: (value) => value!.isEmpty ? 'Please enter deadline date' : null,
+                      validator: (value) =>
+                          value!.isEmpty ? 'Please enter deadline date' : null,
                     ),
                   ),
                 ),
@@ -141,7 +149,8 @@ class _AddTaskState extends State<AddTask> {
                       controller: timeController,
                       floatingTitle: 'Deadline Time',
                       hint: 'Deadline Time',
-                      validator: (value) => value!.isEmpty ? 'Please enter deadline time' : null,
+                      validator: (value) =>
+                          value!.isEmpty ? 'Please enter deadline time' : null,
                     ),
                   ),
                 ),
@@ -151,7 +160,8 @@ class _AddTaskState extends State<AddTask> {
                   floatingTitle: 'Task Duration',
                   hint: 'Task Duration',
                   isNumberOnly: true,
-                  validator: (value) => value!.isEmpty ? 'Please enter task duration' : null,
+                  validator: (value) =>
+                      value!.isEmpty ? 'Please enter task duration' : null,
                 ),
                 appSpaces.spaceForHeight20,
                 CustomButton(
@@ -159,39 +169,42 @@ class _AddTaskState extends State<AddTask> {
                   onTap: () {
                     if (formKey.currentState!.validate()) {
                       final deadLine = DateTime.parse(dateController.text);
-                      final expectedDuration = Duration(hours: int.parse(durationController.text));
+                      final expectedDuration =
+                          Duration(hours: int.parse(durationController.text));
                       final deadlineTime = selectedTime;
-            
+
                       if (widget.task == null) {
                         context.read<TaskCubit>().createTask(Task(
-                          title: titleController.text,
-                          description: desController.text,
-                          deadlineDate: deadLine,
-                          deadlineTime: deadlineTime,
-                          expectedDuration: expectedDuration,
-                          isComplete: false,
-                        ));
+                              title: titleController.text,
+                              description: desController.text,
+                              deadlineDate: deadLine,
+                              deadlineTime: deadlineTime,
+                              expectedDuration: expectedDuration,
+                              isComplete: false,
+                            ));
                       } else {
                         context.read<TaskCubit>().updateTask(Task(
-                          id: widget.task!.id,
-                          title: titleController.text,
-                          description: desController.text,
-                          deadlineDate: deadLine,
-                          deadlineTime: deadlineTime,
-                          expectedDuration: expectedDuration,
-                          isComplete: false,
-                        ));
+                              id: widget.task!.id,
+                              title: titleController.text,
+                              description: desController.text,
+                              deadlineDate: deadLine,
+                              deadlineTime: deadlineTime,
+                              expectedDuration: expectedDuration,
+                              isComplete: false,
+                            ));
                       }
                     }
                   },
-                  title: Center(child: Text('Save', style: appFont.f16w500white)),
+                  title:
+                      Center(child: Text('Save', style: appFont.f16w500white)),
                 ),
                 CustomButton(
                   buttonWidth: screenWidth(context),
                   onTap: () {
                     Get.back();
                   },
-                  title: Center(child: Text('Cancel', style: appFont.f16w500white)),
+                  title: Center(
+                      child: Text('Cancel', style: appFont.f16w500white)),
                 ),
               ],
             ),

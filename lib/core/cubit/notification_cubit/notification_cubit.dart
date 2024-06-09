@@ -1,11 +1,9 @@
-import 'dart:io';
+
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
-
-
 import '../../model/task_model.dart';
 
 
@@ -60,29 +58,5 @@ class NotificationCubit extends Cubit<NotificationState> {
     emit(NotificationCancelled(taskId));
   }
 
-  Future<bool> _isAndroid12OrAbove() async {
-    if (Platform.isAndroid) {
-      final version = await _getAndroidVersion();
-      return version >= 31; // Android 12 is API level 31
-    }
-    return false;
-  }
-
-  Future<int> _getAndroidVersion() async {
-    final versionString = await _getSystemProperty('ro.build.version.sdk');
-    return int.tryParse(versionString) ?? 0;
-  }
-
-  Future<String> _getSystemProperty(String property) async {
-    // This requires platform channel or some plugin to get system property.
-    // For simplicity, returning an empty string.
-    return '';
-  }
-
-  Future<bool> _requestExactAlarmPermission() async {
-    // Use the Permission Handler or other appropriate plugin to request exact alarm permission
-    // Returning true for simplicity
-    return true;
-  }
 
    }
