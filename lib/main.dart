@@ -20,6 +20,14 @@ Future<void> main() async {
   await Firebase.initializeApp();
   await LocalNotifications.init();
   tz.initializeTimeZones();
+
+  var initialNotification = await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+  if (initialNotification?.didNotificationLaunchApp == true) {
+    Future.delayed(Duration(seconds: 1), () {
+      navigatorKey.currentState!.pushNamed('/another', arguments: initialNotification?.notificationResponse?.payload);
+    });
+  }
+
   runApp(MyApp());
 }
 

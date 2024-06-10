@@ -9,9 +9,9 @@ class TaskLoading extends TaskState {}
 
 class TaskSuccess extends TaskState {
   final Task? task;
-  final String message;
+ 
 
-  TaskSuccess({this.task,required this.message});
+  TaskSuccess({this.task});
 }
 
 class TasksLoaded extends TaskState {

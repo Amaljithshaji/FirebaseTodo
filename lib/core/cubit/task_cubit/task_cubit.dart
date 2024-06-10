@@ -39,7 +39,7 @@ class TaskCubit extends Cubit<TaskState> {
       Task newTask = task.copyWith(id: docRef.id);
       await notificationCubit.scheduleNotification(newTask); // Schedule notification
       fetchTasks();  // Refresh tasks
-      emit(TaskSuccess(message: 'Task Created'));
+      emit(TaskSuccess());
     } catch (e) {
       emit(TaskFailure(message: e.toString()));
     }
@@ -51,7 +51,7 @@ class TaskCubit extends Cubit<TaskState> {
       await tasksRef.doc(task.id).update(task.toMap());
       await notificationCubit.scheduleNotification(task); // Schedule notification
       fetchTasks();  // Refresh tasks
-      emit(TaskSuccess(message: 'Task Updated'));
+      emit(TaskSuccess());
     } catch (e) {
       emit(TaskFailure(message: e.toString()));
     }
@@ -63,7 +63,7 @@ class TaskCubit extends Cubit<TaskState> {
       await tasksRef.doc(taskId).delete();
       await notificationCubit.cancelNotification(taskId); // Cancel notification
       fetchTasks();  // Refresh tasks
-      emit(TaskSuccess(message: 'Task deleted'));
+      emit(TaskSuccess());
     } catch (e) {
       emit(TaskFailure(message: e.toString()));
     }
@@ -79,7 +79,7 @@ class TaskCubit extends Cubit<TaskState> {
         await notificationCubit.scheduleNotification(task); // Reschedule notification if marked incomplete
       }
       fetchTasks();  // Refresh tasks
-      emit(TaskSuccess(message: 'Task Updated'));
+      emit(TaskSuccess());
     } catch (e) {
       emit(TaskFailure(message: e.toString()));
     }

@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
         listener: (context, state) {
           if (state is TaskSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
+              SnackBar(content: Text("success")),
             );
           } else if (state is TaskFailure) {
             print(state.message);
