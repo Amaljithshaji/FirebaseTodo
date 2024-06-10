@@ -1,4 +1,3 @@
-
 import 'package:base/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,17 +13,19 @@ class DetailCard extends StatelessWidget {
   const DetailCard({super.key, required this.task, required this.index});
   final Task task;
   final String index;
- 
+
   @override
   Widget build(BuildContext context) {
     final deadlineDate = DateFormat('yyyy-MM-dd').format(task.deadlineDate);
-     String formatTimeOfDay(TimeOfDay timeOfDay) {
-  final now = DateTime.now();
-  final dt = DateTime(now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
-  final format = MaterialLocalizations.of(context).formatTimeOfDay(timeOfDay);
-  return format;
-}
-    
+    String formatTimeOfDay(TimeOfDay timeOfDay) {
+      final now = DateTime.now();
+      final dt = DateTime(
+          now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
+      final format =
+          MaterialLocalizations.of(context).formatTimeOfDay(timeOfDay);
+      return format;
+    }
+
     final duration = task.expectedDuration.inHours.toString();
     return Container(
       padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
@@ -80,7 +81,8 @@ class DetailCard extends StatelessWidget {
                 'Deadline Time:',
                 style: appFont.f18w400Black,
               ),
-              Text(formatTimeOfDay(task.deadlineTime), style: appFont.f18w400Black),
+              Text(formatTimeOfDay(task.deadlineTime),
+                  style: appFont.f18w400Black),
             ],
           ),
           Row(
@@ -159,5 +161,4 @@ class DetailCard extends StatelessWidget {
       ),
     );
   }
- 
 }

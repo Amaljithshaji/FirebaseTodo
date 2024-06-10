@@ -1,4 +1,4 @@
-import 'package:base/main.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -86,12 +86,13 @@ class _AddTaskState extends State<AddTask> {
     }
   }
 
-String formatTimeOfDay(TimeOfDay timeOfDay) {
-  final now = DateTime.now();
-  final dt = DateTime(now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
-  final format = MaterialLocalizations.of(context).formatTimeOfDay(timeOfDay);
-  return format;
-}
+  String formatTimeOfDay(TimeOfDay timeOfDay) {
+    final now = DateTime.now();
+    final dt = DateTime(
+        now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
+    final format = MaterialLocalizations.of(context).formatTimeOfDay(timeOfDay);
+    return format;
+  }
 
   @override
   Widget build(BuildContext context) {
